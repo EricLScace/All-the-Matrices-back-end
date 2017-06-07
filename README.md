@@ -15,8 +15,8 @@
 ### Github setup
 
 ### Back end setup
-[Rails Heroku setup guide](https://git.generalassemb.ly/ga-wdi-boston/rails-heroku-setup-guide)
-See issue [#1](/../../issues/1) for checklist of set-up from Rails template.
+* [Rails Heroku setup guide](https://git.generalassemb.ly/ga-wdi-boston/rails-heroku-setup-guide)
+* See issue [#1](/../../issues/1) for checklist of set-up from Rails template.
 
 ### Front end
 

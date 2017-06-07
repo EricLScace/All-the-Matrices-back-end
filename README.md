@@ -15,8 +15,10 @@
 ### Github setup
 
 ### Back end setup
-[Rails Heroku setup guide](https://git.generalassemb.ly/ga-wdi-boston/rails-heroku-setup-guide)
-See issue [#1](/../../issues/1) for checklist of set-up from Rails template.
+* [Rails Heroku setup guide](https://git.generalassemb.ly/ga-wdi-boston/rails-heroku-setup-guide)
+* See issue [#1](/../../issues/1) for checklist of set-up from Rails template.
+* After each merge into master, push to both my `origin master` repo and `heroku master`.
+* Database migrations etc must also be run on heroku with `heroku run rake db:migrate` etc.
 
 ### Front end
 

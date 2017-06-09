@@ -2,7 +2,7 @@
 # Created by https://www.gitignore.io/api/macos,linux
 
 ### macOS ###
-*.DS_Store
+.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -59,7 +59,7 @@ Temporary Items
 /tmp/
 
 # Used by dotenv library to load environment variables.
-# .env
+.env
 
 ## Specific to RubyMotion:
 .dat*
@@ -117,10 +117,10 @@ rerun.txt
 pickle-email-*.html
 
 # TODO Comment out this rule if you are OK with secrets being uploaded to the repo
-# config/initializers/secret_token.rb
+config/initializers/secret_token.rb
 
 # Only include if you have production secrets in this file, which is no longer a Rails default
-# config/secrets.yml
+config/secrets.yml
 
 # dotenv
 # TODO Comment out this rule if environment variables can be committed

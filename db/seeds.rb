@@ -25,9 +25,22 @@ csv = CSV.parse(
   encoding: 'ISO-8859-1'
 )
 csv.each do |row|
-  puts row['width'].to_s
   Width.create(
     glyph_width: row['width']
   )
 end
 puts "There are #{Width.count} rows in the widths table."
+
+# Orientations table seeding
+Orientation.delete_all
+csv = CSV.parse(
+  File.read('data/orientations.csv'),
+  headers: true,
+  encoding: 'ISO-8859-1'
+)
+csv.each do |row|
+  Orientation.create(
+    orientation: row['orientation']
+  )
+end
+puts "There are #{Orientation.count} rows in the orientations table."

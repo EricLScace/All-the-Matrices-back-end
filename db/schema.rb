@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610213618) do
+ActiveRecord::Schema.define(version: 20170610222420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,29 @@ ActiveRecord::Schema.define(version: 20170610213618) do
     t.index ["user_id"], name: "index_examples_on_user_id", using: :btree
   end
 
+  create_table "faces", force: :cascade do |t|
+    t.text     "face"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fonts", force: :cascade do |t|
+    t.text     "font"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "manufacturers", force: :cascade do |t|
     t.text     "name"
     t.text     "symbol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "optical_sizes", force: :cascade do |t|
+    t.decimal  "points",     precision: 6, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "orientations", force: :cascade do |t|
@@ -46,10 +64,16 @@ ActiveRecord::Schema.define(version: 20170610213618) do
     t.index ["token"], name: "index_users_on_token", unique: true, using: :btree
   end
 
+  create_table "weights", force: :cascade do |t|
+    t.text     "weight"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "widths", force: :cascade do |t|
-    t.text     "glyph_width"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "width"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "examples", "users"

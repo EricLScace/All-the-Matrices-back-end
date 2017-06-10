@@ -26,7 +26,7 @@ csv = CSV.parse(
 )
 csv.each do |row|
   Width.create(
-    glyph_width: row['width']
+    width: row['width']
   )
 end
 puts "There are #{Width.count} rows in the widths table."

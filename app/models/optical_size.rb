@@ -1,0 +1,2 @@
+class OpticalSize < ApplicationRecord
+end

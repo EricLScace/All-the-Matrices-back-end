@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20170610205813) do
   end
 
   create_table "widths", force: :cascade do |t|
-    t.text     "width"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "glyph_width"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_foreign_key "examples", "users"

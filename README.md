@@ -1,33 +1,5 @@
 # All the Matrices website
 
-## Contents
-* Checklists for initial setup
-  * Github setup
-  * Back end
-  * Front end
-* Structure
-* Tasks
-* APIs
-  * Authentication
-
-## Checklists for initial setup
-
-### Github setup
-
-### Back end setup
-* [Rails Heroku setup guide](https://git.generalassemb.ly/ga-wdi-boston/rails-heroku-setup-guide)
-* See issue [#1](/../../issues/1) for checklist of set-up from Rails template.
-
-### Front end
-
-## Structure
-
-This template follows the standard project structure in Rails 4.
-
-`curl` command scripts are stored in [`scripts`](scripts) with names that
-correspond to API actions.
-
-User authentication is built-in.
 
 ## Tasks
 

@@ -1,4 +1,4 @@
-<% project_name = 'AllTheMatsgit pus' %>
+<% project_name = 'AllTheMatsgit git pupus' %>
 
 default: &default
   adapter: postgresql

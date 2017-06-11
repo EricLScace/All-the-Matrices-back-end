@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611001045) do
+ActiveRecord::Schema.define(version: 20170611011845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20170611001045) do
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.index ["manufacturer_id"], name: "index_matrices_on_manufacturer_id", using: :btree
+  end
+
+  create_table "normal_typefaces", force: :cascade do |t|
+    t.integer  "typeface_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["typeface_id"], name: "index_normal_typefaces_on_typeface_id", using: :btree
   end
 
   create_table "optical_sizes", force: :cascade do |t|

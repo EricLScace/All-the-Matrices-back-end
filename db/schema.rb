@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170610233740) do
+ActiveRecord::Schema.define(version: 20170611001045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 20170610233740) do
     t.text     "symbol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "matrices", force: :cascade do |t|
+    t.integer  "manufacturer_id"
+    t.decimal  "code_prefix",     precision: 6, scale: 2
+    t.integer  "code_suffix"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["manufacturer_id"], name: "index_matrices_on_manufacturer_id", using: :btree
   end
 
   create_table "optical_sizes", force: :cascade do |t|

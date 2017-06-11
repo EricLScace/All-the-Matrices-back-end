@@ -55,15 +55,19 @@ class UsersController < ProtectedController
   end
 
   def update
-    head :bad_request
+    if current_user == User.find(params[:id])
+      update_owner
+      render json: current_user, status: :created
+    else
+      head :unauthorized
+    end
   end
 
   private
 
-  def user_creds
+  def owner_creds
     params.require(:credentials)
-          .permit(:email, :password, :password_confirmation,
-                  :name, :organization)
+          .permit(:name, :organization)
   end
 
   def pw_creds
@@ -71,5 +75,16 @@ class UsersController < ProtectedController
           .permit(:old, :new)
   end
 
-  private :user_creds, :pw_creds
+  def update_owner
+    current_user.name = owner_creds[:name]
+    current_user.organization = owner_creds[:organization]
+  end
+
+  def user_creds
+    params.require(:credentials)
+          .permit(:email, :password, :password_confirmation,
+                  :name, :organization)
+  end
+
+  private :user_creds, :pw_creds, :owner_creds, :update_owner
 end

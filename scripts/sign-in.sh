@@ -1,8 +1,8 @@
 #!/bin/bash
 EMAIL="eric@scace.org"
-PASSWORD="k3na"
-API="https://allthemats.herokuapp.com/"
-# API="${API_ORIGIN:-http://localhost:4741}"
+PASSWORD="k3nak3na"
+# API="https://allthemats.herokuapp.com/"
+API="${API_ORIGIN:-http://localhost:4741}"
 
 URL_PATH="/sign-in"
 curl "${API}${URL_PATH}" \

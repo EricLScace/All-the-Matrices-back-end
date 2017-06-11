@@ -16,6 +16,10 @@ Requirements & design information are in the repo wiki. The landing page contain
 - [x] 2017 Jun 09 Fri: set up back-end template. _Completed 2017 Jun 10 Sat._
 - [x] 2017 Jun 09 Fri: Build and seed tables. _Completed 2017 Jun 11 Sun, except for some wiki doc updates._
 - [ ] 2017 Jun 10 Sat: Complete pseudo-code for back-end.
+  - [ ] modifications to sign-up, user, users for name & organization.
+  - [ ] add change settings.
+  - [ ] add matrix-get-one.
+  - [ ] add matrix-own.
 - [ ] 2017 Jun 10 Sat: Complete coding & test of back-end.
 - [ ] 2017 Jun 11 Sun: Update wireframes & UX flow.
 - [ ] 2017 Jun 11 Sun: Complete pseudo-code for front-end.

@@ -22573,3 +22573,130 @@ Filter chain halted as :authenticate rendered or redirected
 Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.3ms)
 
 
+Started POST "/sign-up" for 127.0.0.1 at 2017-06-11 16:33:09 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#signup as */*
+  Parameters: {"credentials"=>{"email"=>"eric@k3na1.org", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "version"=>"1.0", "name"=>"Eric Scace", "organization"=>"Skaneateles Press"}}
+Completed 500 Internal Server Error in 81ms (ActiveRecord: 3.4ms)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'version' for User.):
+  
+app/controllers/users_controller.rb:8:in `signup'
+Started POST "/sign-up" for 127.0.0.1 at 2017-06-11 16:36:45 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#signup as */*
+  Parameters: {"credentials"=>{"email"=>"eric@k3na1.org", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na1.org"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na1.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "token", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "eric@k3na1.org"], ["token", "852ad77294b988649b2f4facd342e4be"], ["password_digest", "$2a$10$uYyNCSpCkBubPkq5G0J1NuVHll.NbN7FexSzqL/RXZDm69sFXEG3u"], ["created_at", 2017-06-11 20:36:46 UTC], ["updated_at", 2017-06-11 20:36:46 UTC]]
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["email", "eric@k3na1.org"], ["id", 2], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["email", "eric@k3na1.org"], ["id", 2], ["LIMIT", 1]]
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Json (1.8ms)
+Completed 201 Created in 121ms (Views: 13.2ms | ActiveRecord: 11.3ms)
+
+
+Started POST "/sign-up" for 127.0.0.1 at 2017-06-11 16:45:16 -0400
+Processing by UsersController#signup as */*
+  Parameters: {"credentials"=>{"email"=>"eric@k3na1.org", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na1.org"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na1.org"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na1.org"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na1.org"], ["LIMIT", 1]]
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with ActiveModel::Errors (0.08ms)
+Completed 400 Bad Request in 92ms (Views: 4.3ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/sign-up" for 127.0.0.1 at 2017-06-11 16:45:51 -0400
+Processing by UsersController#signup as */*
+  Parameters: {"credentials"=>{"email"=>"eric@k3na2.org", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na2.org"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na2.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "token", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "eric@k3na2.org"], ["token", "1f70dd793b8600caccc0f70339d6a145"], ["password_digest", "$2a$10$ZSUsCtdIgp6t/iCH3Ubgo.QGfV7R3zhk3PqDb4wTFW8s30NWWIhy2"], ["created_at", 2017-06-11 20:45:51 UTC], ["updated_at", 2017-06-11 20:45:51 UTC]]
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["email", "eric@k3na2.org"], ["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["email", "eric@k3na2.org"], ["id", 3], ["LIMIT", 1]]
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Json (0.29ms)
+Completed 201 Created in 74ms (Views: 1.6ms | ActiveRecord: 4.0ms)
+
+
+Started POST "/sign-up" for 127.0.0.1 at 2017-06-11 16:47:08 -0400
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    "credentials": {
+      "email": "eric@k3na3.org",
+      "password": "k3nak3na",
+      "password_confirmation": "k3nak3na",
+      "name": "Eric Scace",
+    }
+  }
+  
+ActionDispatch::ParamsParser::ParseError (822: unexpected token at '{
+    "credentials": {
+      "email": "eric@k3na3.org",
+      "password": "k3nak3na",
+      "password_confirmation": "k3nak3na",
+      "name": "Eric Scace",
+    }
+  }'):
+  
+actionpack (5.0.1) lib/action_dispatch/http/parameters.rb:78:in `rescue in parse_formatted_parameters'
+actionpack (5.0.1) lib/action_dispatch/http/parameters.rb:72:in `parse_formatted_parameters'
+actionpack (5.0.1) lib/action_dispatch/http/request.rb:354:in `block in POST'
+rack (2.0.1) lib/rack/request.rb:57:in `fetch'
+rack (2.0.1) lib/rack/request.rb:57:in `fetch_header'
+actionpack (5.0.1) lib/action_dispatch/http/request.rb:353:in `POST'
+actionpack (5.0.1) lib/action_dispatch/http/parameters.rb:35:in `parameters'
+actionpack (5.0.1) lib/action_dispatch/http/filter_parameters.rb:41:in `filtered_parameters'
+actionpack (5.0.1) lib/action_controller/metal/instrumentation.rb:21:in `process_action'
+actionpack (5.0.1) lib/action_controller/metal/params_wrapper.rb:248:in `process_action'
+activerecord (5.0.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+actionpack (5.0.1) lib/abstract_controller/base.rb:126:in `process'
+actionpack (5.0.1) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.1) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.1) lib/rack/etag.rb:25:in `call'
+rack (2.0.1) lib/rack/conditional_get.rb:38:in `call'
+rack (2.0.1) lib/rack/head.rb:12:in `call'
+activerecord (5.0.1) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+rack-cors (0.4.0) lib/rack/cors.rb:80:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.7.0) lib/puma/configuration.rb:226:in `call'
+puma (3.7.0) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.0) lib/puma/server.rb:415:in `process_client'
+puma (3.7.0) lib/puma/server.rb:275:in `block in run'
+puma (3.7.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'

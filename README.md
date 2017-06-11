@@ -14,7 +14,7 @@ Requirements & design information are in the repo wiki. The landing page contain
 - [x] 2017 Jun 08 Thu: complete ORM, ERD and table design to support user stories. _Completed 2017 Jun 09 Fri._
 - [x] 2017 Jun 08 Thu: complete API design to support user stories. _Completed 2017 Jun 09 Fri._
 - [x] 2017 Jun 09 Fri: set up back-end template. _Completed 2017 Jun 10 Sat._
-- [ ] 2017 Jun 09 Fri: Build and seed tables.
+- [x] 2017 Jun 09 Fri: Build and seed tables. _Completed 2017 Jun 11 Sun, except for some wiki doc updates._
 - [ ] 2017 Jun 10 Sat: Complete pseudo-code for back-end.
 - [ ] 2017 Jun 10 Sat: Complete coding & test of back-end.
 - [ ] 2017 Jun 11 Sun: Update wireframes & UX flow.

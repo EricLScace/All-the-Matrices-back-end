@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170611013012) do
+ActiveRecord::Schema.define(version: 20170611014251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,11 +58,17 @@ ActiveRecord::Schema.define(version: 20170611013012) do
 
   create_table "matrices", force: :cascade do |t|
     t.integer  "manufacturer_id"
-    t.decimal  "code_prefix",     precision: 6, scale: 2
+    t.decimal  "code_prefix",        precision: 6, scale: 2
     t.integer  "code_suffix"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "normal_typeface_id"
+    t.integer  "aux1_typeface_id"
+    t.integer  "aux2_typeface_id"
+    t.index ["aux1_typeface_id"], name: "index_matrices_on_aux1_typeface_id", using: :btree
+    t.index ["aux2_typeface_id"], name: "index_matrices_on_aux2_typeface_id", using: :btree
     t.index ["manufacturer_id"], name: "index_matrices_on_manufacturer_id", using: :btree
+    t.index ["normal_typeface_id"], name: "index_matrices_on_normal_typeface_id", using: :btree
   end
 
   create_table "normal_typefaces", force: :cascade do |t|
@@ -126,4 +132,7 @@ ActiveRecord::Schema.define(version: 20170611013012) do
   end
 
   add_foreign_key "examples", "users"
+  add_foreign_key "matrices", "aux1_typefaces"
+  add_foreign_key "matrices", "aux2_typefaces"
+  add_foreign_key "matrices", "normal_typefaces"
 end

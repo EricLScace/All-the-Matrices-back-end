@@ -2,4 +2,5 @@
 
 class Font < ApplicationRecord
   has_many :typefaces
+  validates :font, uniqueness: true
 end

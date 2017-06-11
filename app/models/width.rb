@@ -2,4 +2,5 @@
 
 class Width < ApplicationRecord
   has_many :typefaces
+  validates :width, uniqueness: true
 end

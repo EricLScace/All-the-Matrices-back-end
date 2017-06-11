@@ -2,4 +2,5 @@
 
 class Face < ApplicationRecord
   has_many :typefaces
+  validates :face, uniqueness: true
 end

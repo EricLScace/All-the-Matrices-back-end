@@ -2,4 +2,5 @@
 
 class Aux1Typeface < ApplicationRecord
   has_many :matrices
+  validates :typeface_id, uniqueness: true
 end

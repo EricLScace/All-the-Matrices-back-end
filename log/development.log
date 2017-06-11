@@ -22700,3 +22700,18 @@ puma (3.7.0) lib/puma/server.rb:578:in `handle_request'
 puma (3.7.0) lib/puma/server.rb:415:in `process_client'
 puma (3.7.0) lib/puma/server.rb:275:in `block in run'
 puma (3.7.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Started POST "/sign-up" for 127.0.0.1 at 2017-06-11 16:54:41 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#signup as */*
+  Parameters: {"credentials"=>{"email"=>"eric@k3na3.org", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "name"=>"Eric Scace", "organization"=>"Skaneateles Press"}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.9ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na3.org"], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "eric@k3na3.org"], ["LIMIT", 1]]
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "token", "password_digest", "created_at", "updated_at", "name", "organization") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "eric@k3na3.org"], ["token", "49a88b1a0538c317795893c49d33f1d6"], ["password_digest", "$2a$10$ooX7DqeQO1ZzuyDZiLgae.GaAYM6BE1DUaixvWtPkZmPrkxboXwY6"], ["created_at", 2017-06-11 20:54:42 UTC], ["updated_at", 2017-06-11 20:54:42 UTC], ["name", "Eric Scace"], ["organization", "Skaneateles Press"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["email", "eric@k3na3.org"], ["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND ("users"."id" != $2) LIMIT $3[0m  [["email", "eric@k3na3.org"], ["id", 4], ["LIMIT", 1]]
+[active_model_serializers] Rendered UserSerializer with ActiveModelSerializers::Adapter::Json (2.01ms)
+Completed 201 Created in 122ms (Views: 12.7ms | ActiveRecord: 11.4ms)
+
+

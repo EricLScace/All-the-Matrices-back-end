@@ -1,6 +1,9 @@
 #!/bin/bash
 EMAIL="eric@k3na3.org"
 PASSWORD="k3nak3na"
+NAME="Eric Scace"
+ORGANIZATION="Skaneateles Press"
+
 # API="https://allthemats.herokuapp.com/"
 API="${API_ORIGIN:-http://localhost:4741}"
 
@@ -14,6 +17,8 @@ curl "${API}${URL_PATH}" \
       "email": "'"${EMAIL}"'",
       "password": "'"${PASSWORD}"'",
       "password_confirmation": "'"${PASSWORD}"'",
+      "name": "'"${NAME}"'",
+      "organization": "'"${ORGANIZATION}"'"
     }
   }'
 

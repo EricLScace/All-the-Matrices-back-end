@@ -63,6 +63,7 @@ class UsersController < ProtectedController
     end
   end
 
+  # ===== private class methods follow =====
   private
 
   def owner_creds
@@ -85,6 +86,4 @@ class UsersController < ProtectedController
           .permit(:email, :password, :password_confirmation,
                   :name, :organization)
   end
-
-  private :user_creds, :pw_creds, :owner_creds, :update_owner
 end

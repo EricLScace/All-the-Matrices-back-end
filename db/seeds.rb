@@ -4,6 +4,7 @@ require 'csv'
 
 # 1: all matrices are Linotype
 # Create the manufactuer, if new, and enter into Matrix row
+# Greek upper-case delta used for symbol
 @manu = Manufacturer.find_or_create_by!(
   name: 'Linotype',
   symbol: 'Δ'

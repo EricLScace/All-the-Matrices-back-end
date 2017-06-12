@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :examples, except: %i[new edit]
+  resources :matrix, only: %i[index]
   resources :users, only: %i[index show update]
 
   # AuthN routes

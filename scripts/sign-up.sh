@@ -1,5 +1,5 @@
 #!/bin/bash
-EMAIL="eric@k3na3.org"
+EMAIL="eric@scace.org"
 PASSWORD="k3nak3na"
 NAME="Eric Scace"
 ORGANIZATION="Skaneateles Press"

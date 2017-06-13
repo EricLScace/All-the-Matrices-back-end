@@ -1,4 +1,5 @@
 #!/bin/bash
+TOKEN=BAhJIiVmNzJmZjc0MmRjYjgwZDBhNGQ0ZjhjMjcyMDhlNWNiYwY6BkVG--c9d1f121c736696f9aa55ed73b126bb5ac4e7474
 
 # # 2-typeface matrix
 # 12 pt Parma with Boldface No. 11 italic
@@ -20,7 +21,7 @@ SUFFIX=630
 # PREFIX=4.75
 # SUFFIX=2
 
-# user is not authenticated — public request
+# user is authenticated
 
 # API="https://allthemats.herokuapp.com/"
 API="http://localhost:4741"
@@ -28,14 +29,15 @@ API="http://localhost:4741"
 curl "${API}/matrix" \
   --include \
   --request GET \
+  --header "Authorization: Token token=${TOKEN}" \
   --header "Content-Type: application/json" \
   --data '{
     "version": "1.0",
-      "matrix": {
-        "code_prefix": "'"${PREFIX}"'",
-        "symbol": "Δ",
-        "code_suffix": "'"${SUFFIX}"'"
-      }
-    }'
+    "matrix": {
+      "code_prefix": "'"${PREFIX}"'",
+      "symbol": "Δ",
+      "code_suffix": "'"${SUFFIX}"'"
+    }
+  }'
 
 echo

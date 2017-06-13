@@ -6,6 +6,7 @@
 class MatrixController < ProtectedController
   include ActionView::Helpers::NumberHelper
   skip_before_action :authenticate, only: :index
+  before_action :set_current_user, only: :index
   before_action :check_params, :check_version
   before_action :find_matrix, only: %i[index update]
   # before_action :get_current_user, only: %i[index update]
@@ -15,9 +16,34 @@ class MatrixController < ProtectedController
     # Before_action attempted to retrieve the requested matrix.
     # If no corresponding matrix was found, return a no-content 204 message
     if @matrix
-      render json: { "version": @version, "matrix": matrix_description }
+      if current_user
+        render json: { "version": @version,
+                       "matrix": matrix_owner_description }
+      else
+        render json: { "version": @version,
+                       "matrix": matrix_description }
+      end
     else
       head :no_content
+    end
+  end
+
+  def update
+    quantity = params[:matrix][:quantity].to_i
+    if @matrix && quantity
+      if quantity >= 0
+        o = OwnerMatrix.find_or_create_by(
+          user_id: current_user.id,
+          matrix_id: @matrix.id
+        )
+        o.update(quantity: quantity)
+
+        render json: { "version": @version, "matrix": matrix_owner_description }
+      else head :bad_request # Quantity not a positive integer
+      end
+    elsif params[:quantity] # Quantity present but no matrix found
+      head :no_content
+    else head :bad_request # Quantity missing
     end
   end
 
@@ -30,6 +56,7 @@ class MatrixController < ProtectedController
     params.require(:matrix).require(:code_prefix)
     params.require(:matrix).require(:symbol)
     params.require(:matrix).require(:code_suffix)
+    params.require(:matrix).permit(:quantity)
   end
 
   def check_version
@@ -72,6 +99,26 @@ class MatrixController < ProtectedController
       normal_typeface: tfd_to_s(tfd_normal), \
       aux1_typeface: tfd_to_s(tfd_aux1), \
       aux2_typeface: tfd_to_s(tfd_aux2) }
+  end
+
+  def matrix_owner_description
+    mod = matrix_description
+    # now add the ownership data
+    # Is owner the person or the organization?
+    mod[:owner] = if current_user.organization
+                    current_user.organization
+                  else
+                    current_user.name
+                  end
+    o = OwnerMatrix.find_by(user_id: current_user.id,
+                            matrix_id: @matrix.id)
+    binding.pry
+    mod[:quantity] = if o
+                       o[:quantity].to_s
+                     else
+                       '0'
+                     end
+    mod
   end
 
   def points_to_vulgar(points)

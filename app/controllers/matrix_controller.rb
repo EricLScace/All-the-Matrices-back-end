@@ -4,7 +4,7 @@
 # users_matrices.user = user
 
 class MatrixController < ProtectedController
-  # include ActionView::Helpers
+  include ActionView::Helpers::NumberHelper
   skip_before_action :authenticate, only: :index
   before_action :check_params, :check_version
   before_action :find_matrix, only: %i[index update]
@@ -20,20 +20,9 @@ class MatrixController < ProtectedController
       head :no_content
     end
   end
-  # "normal_typeface": normal_typeface,
-  # "aux1_typeface": aux1_typeface,
-  # "aux2_typeface": aux2_typeface
 
   # ===== Private class methods follow =====
   private
-
-  def aux1_typeface
-    ''
-  end
-
-  def aux2_typeface
-    ''
-  end
 
   def check_params
     # Check for mandatory parameters
@@ -62,22 +51,84 @@ class MatrixController < ProtectedController
     # Truncate optical size to integer if possible.
     # points = number_with_precision(@matrix.code_prefix, \
     #                                strip_insignificant_zeros: true)
-    "#{@manu.name} #{@matrix.code_prefix}#{@manu.symbol}#{@matrix.code_suffix}:"
+    prefix = number_with_precision(
+      @matrix.code_prefix, precision: 2, strip_insignificant_zeros: true
+    ).to_s
+    "#{@manu.name} #{prefix}#{@manu.symbol}#{@matrix.code_suffix}:"
   end
 
   def matrix_description
+    # For now, go through intermediate tables; refactor these away later.
+    normal = NormalTypeface.find @matrix.normal_typeface_id
+    aux1 = Aux1Typeface.find @matrix.aux1_typeface_id
+    aux2 = Aux2Typeface.find @matrix.aux2_typeface_id
+    # assumes tables return blank descriptors if, e.g., aux2 typeface not used
+    tfd_normal = tfd normal.typeface_id
+    tfd_aux1 = tfd aux1.typeface_id
+    tfd_aux2 = tfd aux2.typeface_id
+    tfd_compress tfd_aux1, tfd_aux2
+    tfd_compress tfd_normal, tfd_aux1
     { code: matrix_code, \
-      normal_typeface: nil, \
-      aux1_typeface: nil, \
-      aux2_typeface: nil }
+      normal_typeface: tfd_to_s(tfd_normal), \
+      aux1_typeface: tfd_to_s(tfd_aux1), \
+      aux2_typeface: tfd_to_s(tfd_aux2) }
   end
 
-  # def normal_typeface
-  #   # E.g., 7½ pt Opticon
-  #   # Suppress default field values, which are designated with parenthesis.
-  #   # Optical_size should be converted to vulgar fractions if needed.
-  #   binding.pry
-  #   optical_size = Typeface(@matrix.normal_typeface_id)
-  #   # "#{} pt"
-  # end
+  def points_to_vulgar(points)
+    # Convert fractional points to vulgar equivalent
+    if points.nil?
+      str = ''
+    else
+      str = points.floor.to_s
+      fraction = (100 * (points - points.floor)).floor
+      case fraction
+      when 25
+        str << '¼ pt'
+      when 33
+        str << '⅓ pt'
+      when 50
+        str << '½ pt'
+      when 66, 67
+        str << '⅔ pt'
+      when 75
+        str << '¾ pt'
+      end
+    end
+    str
+  end
+
+  def tfd(typeface_id)
+    # tfd(typeface_id) -- loads the typeface descriptors into a hash
+    tf = Typeface.find(typeface_id)
+    pts = OpticalSize.find(tf.optical_size_id)[:points]
+    {
+      points: points_to_vulgar(pts),
+      font: Font.find(tf.font_id)[:font],
+      face: Face.find(tf.face_id)[:face],
+      weight: Weight.find(tf.weight_id)[:weight],
+      width: Width.find(tf.width_id)[:width],
+      orientation: Orientation.find(tf.orientation_id)[:orientation]
+    }
+  end
+
+  def tfd_compress(tfd1, tfd2)
+    # tfd_compress deletes descriptors from tfd2 in common with tfd1
+    tfd2[:points] = '' if tfd1[:points] == tfd2[:points]
+    tfd2[:font] = '' if tfd1[:font] == tfd2[:font]
+    tfd2[:face] = '' if tfd1[:face] == tfd2[:face]
+    tfd2[:weight] = '' if tfd1[:weight] == tfd2[:weight]
+    tfd2[:width] = '' if tfd1[:width] == tfd2[:width]
+    tfd2[:orientation] = '' if tfd1[:orientation] == tfd2[:orientation]
+  end
+
+  def tfd_to_s(tfd)
+    # Convert typeface descriptors tfd hash into a string
+    # E.g., 7½ pt Opticon    # Optical_size should be converted to vulgar fractions if needed.
+    str = "#{tfd[:points]} #{tfd[:font]} #{tfd[:face]} #{tfd[:weight]} " \
+          "#{tfd[:width]} #{tfd[:orientation]}"
+    # remove any parenthesis
+    # Suppress default field values, which are designated with parenthesis.
+    str = str.gsub('roman', '').gsub('normal', '').gsub('regular', '')
+    str.gsub('horizontal', '').gsub('()', '').split.join(' ')
+  end
 end

@@ -56,12 +56,11 @@ require 'csv'
     width_id: @width.id,
     orientation_id: @orientation.id
   )
-
-  unless @size.points.to_s == ''
+  # unless @size.points.to_s == ''
     puts "     with \
 #{@size.points} pt #{@font.font} #{@face.face} #{@weight.weight} \
 #{@width.width} #{@orientation.orientation}"
-  end
+  # end
 
   # Aux2 typeface, if any
   @size = OpticalSize.find_or_create_by!(points: row['aux2_size'])
@@ -72,6 +71,7 @@ require 'csv'
   @orientation = Orientation.find_or_create_by!(
     orientation: row['aux2_orientation']
   )
+
   @typeface2 = Typeface.find_or_create_by!(
     optical_size_id: @size.id,
     font_id: @font.id,
@@ -80,12 +80,11 @@ require 'csv'
     width_id: @width.id,
     orientation_id: @orientation.id
   )
-
-  unless @size.points.to_s == ''
+  # unless @size.points.to_s == ''
     puts "     and  \
 #{@size.points} pt #{@font.font} #{@face.face} #{@weight.weight} \
 #{@width.width} #{@orientation.orientation}"
-  end
+  # end
 
   # Place the typefaces in their respective Normal, Aux1 & Aux2 tables,
   # if not already present.

@@ -112,7 +112,6 @@ class MatrixController < ProtectedController
                   end
     o = OwnerMatrix.find_by(user_id: current_user.id,
                             matrix_id: @matrix.id)
-    binding.pry
     mod[:quantity] = if o
                        o[:quantity].to_s
                      else

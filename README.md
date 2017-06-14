@@ -3,7 +3,7 @@
 This is the back-end repo for `allthemats.com`, a web app that helps letterpress
 compositors identify Linotype matrices and their typefaces.
 
-The front-end repo is {enter location}.
+The front-end repo is <https://github.com/EricLScace/All-the-Matrices-front-end>.
 
 ## V1
 
